@@ -4,7 +4,8 @@ import './index.css'
 import App from './App.jsx'
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import Form from '../Components/Form'
-import EntryForm from '../components/EntryForm.jsx'
+import VideosPage from '../Components/VideosPage.jsx'
+import CategoryPage from '../Pages/CategoryPage.jsx'
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
@@ -15,7 +16,7 @@ createRoot(document.getElementById('root')).render(
         <Route index element={
             <Form 
               fullName={false}
-              backendUrl={`${import.meta.env.VITE_API_BASE_URL}/api/v1/auth/login`}
+              backendUrl={`${import.meta.env.VITE_API_BASE_URL}/api/v1/user/login`}
               type="Login"
               headerText="Login"
             />
@@ -25,7 +26,7 @@ createRoot(document.getElementById('root')).render(
           element={
             <Form 
               fullName={false}
-              backendUrl={`${import.meta.env.VITE_API_BASE_URL}/api/v1/auth/login`}
+              backendUrl={`${import.meta.env.VITE_API_BASE_URL}/api/v1/user/login`}
               type="Login"
               headerText="Login"
             />
@@ -36,7 +37,7 @@ createRoot(document.getElementById('root')).render(
           element={
             <Form 
               fullName={true}
-              backendUrl={`${import.meta.env.VITE_API_BASE_URL}/api/v1/auth/register`}
+              backendUrl={`${import.meta.env.VITE_API_BASE_URL}/api/v1/user/register`}
               type="Registeration"
               headerText="Create an Account"
             />
@@ -45,8 +46,13 @@ createRoot(document.getElementById('root')).render(
 
         <Route path="home" 
           element={
-            <EntryForm />
+            <VideosPage />
           } />
+
+          <Route path='categories'
+            element={
+              <CategoryPage/>
+            }/>
       </Route>
     </Routes>
   </BrowserRouter>,

@@ -13,7 +13,7 @@ const Form = ({fullName = true, backendUrl = "", type="", headerText=""}) => {
         const token = localStorage.getItem("token");
         const apiLoad = async (token) => {
             try {
-                const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/v1/auth/verify`, {
+                const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/v1/user/verify`, {
                     method: "POST",
                     headers: {
                         'content-type': 'application/json'
@@ -119,11 +119,11 @@ const Form = ({fullName = true, backendUrl = "", type="", headerText=""}) => {
         <>
             <Navbar/>
             <section>
-                <div className="max-w-md mx-auto p-6 bg-white rounded-2xl shadow-lg mt-20">
+                <div className="max-w-md mx-auto p-8 py-12 bg-white rounded-xl shadow-lg mt-20">
                     <div
                     className="">
                         <div className="flex items-center justify-center mb-6">
-                            <div className={` rounded-full overflow-hidden border-2 border-gray-200 shadow-md h-24 w-24`}>
+                            <div className={` rounded-full overflow-hidden border-2 border-gray-200 shadow-md h-20 w-20`}>
                             <img
                                 // src="https://via.placeholder.com/150"
                                 src={logo}
@@ -135,12 +135,12 @@ const Form = ({fullName = true, backendUrl = "", type="", headerText=""}) => {
                     <h1 className="text-2xl font-bold text-center">{headerText}</h1>
                     <div className="mt-8">
                         <div className="mt-6">
-                        <form className="space-y-6">
+                        <form className="space-y-7">
                             <div className={showStyle(fullName)}> 
                             <label htmlFor="fullName" className="block text-sm font-medium text-gray-600"> Full Name </label>
                             <div className="mt-1">
                                 <input value={data?.fullName || ""} onChange={handleChange} id="fullName" name="fullName" type="text" autoComplete="fullName" required placeholder="Your Full Name"
-                                className="block w-full px-5 py-3 text-base text-gray-600 placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300" />
+                                className="block w-full px-5 py-3 text-base text-gray-600 placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-2xl bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300" />
                             </div>
                             </div>
 
@@ -149,7 +149,7 @@ const Form = ({fullName = true, backendUrl = "", type="", headerText=""}) => {
                             <label htmlFor="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" className="block text-sm font-medium text-gray-600"> Email address </label>
                             <div className="mt-1">
                                 <input value={data?.email || ""} onChange={handleChange} id="email" name="email" type="email" autoComplete="email" required placeholder="Your Email"
-                                className="block w-full px-5 py-3 text-base text-gray-600 placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300" />
+                                className="block w-full px-5 py-2 text-base text-gray-600 placeholder-gray-300 transition duration-500 ease-in-out transform border border-gray-200 rounded-lg bg-zinc-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300" />
                             </div>
                             </div>
 
@@ -158,13 +158,13 @@ const Form = ({fullName = true, backendUrl = "", type="", headerText=""}) => {
                             <div className="mt-1">
                                 <input value={data?.password || ""} onChange={handleChange} id="password" name="password" type="password" autoComplete="current-password" required
                                 placeholder="Your Password"
-                                className="block w-full px-5 py-3 text-base text-gray-600 placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300" />
+                                className="block w-full px-5 py-2 text-base text-gray-600 placeholder-gray-300 transition duration-500 ease-in-out transform border border-gray-200 rounded-lg bg-zinc-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300" />
                             </div>
                         </div>
 
-                            <div>
+                            <div className="mt-8">
                             <button type="submit" onClick={handleSubmit}
-                                className="w-full bg-blue-600 text-white py-3 rounded-xl hover:bg-blue-700 transition duration-200">Sign
+                                className="w-full bg-blue-500 text-white py-2 rounded-xl hover:bg-blue-700 transition duration-200">Sign
                                 in</button>
                             </div>
                         </form>                     

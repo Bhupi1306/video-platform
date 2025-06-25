@@ -1,20 +1,20 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import logo from "../src/assets/react.svg"
+import logo from "../src/assets/logo.jpg"
 
 
 export default function Navbar() {
     const navigate = useNavigate()
 
     const [showNav, setShowNav] = useState(false);
-    const [newUser, setNewUser] = useState(false);
+    const [isAdmin, setisAdmin] = useState(false);
 
     useEffect(() => {
 
     const token = localStorage.getItem("token");
     const apiLoad = async (token) => {
         try {
-            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/v1/auth/verify`, {
+            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/v1/user/verify`, {
                 method: "POST",
                 headers: {
                     'content-type': 'application/json'
@@ -29,9 +29,9 @@ export default function Navbar() {
             } else {
                 setShowNav(true);
                 if (data.isAdmin) {
-                    setNewUser(true);
+                    setisAdmin(true);
                 } else {
-                    setNewUser(false);
+                    setisAdmin(false);
                 }
             }
 
@@ -46,7 +46,7 @@ export default function Navbar() {
         } else {
         setShowNav(false);
     }
-  }, [showNav,setShowNav, newUser, setNewUser, navigate, localStorage]);
+  }, [showNav,setShowNav, isAdmin, setisAdmin, navigate, localStorage]);
 
 
   const handleLogout = () => {
@@ -62,21 +62,26 @@ export default function Navbar() {
   return (
     <>
     {showNav && (
-    <nav className="bg-white shadow-md px-6 flex justify-between items-center">
-      <div className="text-2xl font-semibold text-blue-600" onClick={() => {navigate('/home')}}>
-        <img src={logo} alt="Logo" className="md:h-18 sm:h-15 h-15" />
+    <nav className="bg-white  px-6 flex justify-between items-center">
+      <div className="text-2xl font-semibold text-blue-600 mt-2" onClick={() => {navigate('/home')}}>
+        <img src={logo} alt="Logo" className="md:h-15 sm:h-12 h-12" />
         </div>
 
+        <ul>
+          <li>Upload</li>
+          <li>Categories</li>
+        </ul>
       <div className="space-x-5">
-        {newUser &&(<button
+        {isAdmin &&(<button
           onClick={handleNewUser}
           className="md:px-4 md:py-2 px-2 py-1 rounded-xl bg-blue-500 text-white hover:bg-blue-600 transition"
         >
           New User
         </button>)}
+        
         <button
           onClick={handleLogout}
-          className="md:px-4 md:py-2 px-2 py-1 rounded-xl bg-blue-500 text-white hover:bg-blue-600 transition"
+          className="md:px-5 md:py-2 px-3 py-2 rounded-lg bg-blue-500 text-white hover:bg-blue-600 transition"
         >
           Logout
         </button>
@@ -86,3 +91,6 @@ export default function Navbar() {
     </>
   );
 }
+
+//TLTD
+// Make the buttons representable and responsive
