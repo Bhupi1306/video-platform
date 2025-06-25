@@ -31,9 +31,7 @@ const Categories = ({name, id, setRerender}) => {
             setIsEditable(!isEditable)
             focusOn.current.blur()
             const result = await backendRequest(`${import.meta.env.VITE_API_BASE_URL}/api/v1/categories/add`, "POST", {id, category: value})
-            if(result.success){
-            }
-            else{
+            if(!result.success){
                 alert("Something went wrong")
                 console.log(result.error)
             }
@@ -41,9 +39,7 @@ const Categories = ({name, id, setRerender}) => {
 
     const handleEnter = async (e) => {
         if(e.key == "Enter")
-        {
             await handleSubmit()
-        }
     }
 
     const handleDelete = async() => {
@@ -88,6 +84,3 @@ const Categories = ({name, id, setRerender}) => {
 export default Categories
 
 
-
-// Things left to do: 
-// 1. Make Delete button work

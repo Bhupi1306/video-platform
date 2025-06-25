@@ -17,6 +17,15 @@ const videoSchema = new mongoose.Schema({
         required: true,
     },
 
+    url: {
+        type: String,
+        required: true
+    },
+
+    thumbnail: {
+        type: String
+    },
+
     uploadedBy: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
@@ -26,7 +35,8 @@ const videoSchema = new mongoose.Schema({
     category: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Category"
-    }
+    },
+
 })
 
 export const Video = mongoose.model("Video", videoSchema)

@@ -101,6 +101,8 @@ const Form = ({fullName = true, backendUrl = "", type="", headerText=""}) => {
                   if (type === "Login") {
                     localStorage.setItem("token", result.jwtToken);
                     localStorage.setItem("name", result.name);
+                    console.log(result.email)
+                    localStorage.setItem("email", result.email)
                     navigate("/home");
                   }
               } else {

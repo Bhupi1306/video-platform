@@ -10,7 +10,8 @@ const jwtVerify = (req,res) => {
 
         return res.status(200).json({message: "User Verified", success: true, isAdmin: decoded.isAdmin})
     }
-    catch{
+    catch(error)
+    {
         return res.status(401).json({message: "Invalid Token", success: false, error})
     }
 }

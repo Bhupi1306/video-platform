@@ -5,6 +5,7 @@ import cors from "cors"
 import 'dotenv/config'
 import { userRouter } from "../Routes/user.routes.js"
 import { categoryRoutes } from "../Routes/category.routes.js"
+import videoRoutes from "../Routes/video.routes.js"
 
 const app = express()
 const port = process.env.PORT || 8000
@@ -15,6 +16,7 @@ app.use(bodyParser.urlencoded())
 
 app.use('/api/v1/user',userRouter)
 app.use('/api/v1/categories', categoryRoutes)
+app.use('/api/v1/video',videoRoutes)
 
 app.listen(port, () => {
     connectDb()

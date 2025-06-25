@@ -55,7 +55,7 @@ const loginUser = async (req,res) => {
 
         
         const jwtToken =  jwt.sign(
-            {_id: user._id, fullname: user.fullName, isAdmin: user.isAdmin },
+            {_id: user._id, fullname: user.fullName, isAdmin: user.isAdmin},
             process.env.JWT_SECRET,
             {expiresIn: '24h'}
         )
@@ -67,6 +67,7 @@ const loginUser = async (req,res) => {
                 success: true,
                 jwtToken,
                 name: user.fullName,
+                email
             }
         )
     } catch (error) {

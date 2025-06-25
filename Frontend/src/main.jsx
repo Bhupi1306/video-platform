@@ -6,6 +6,7 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import Form from '../Components/Form'
 import VideosPage from '../Components/VideosPage.jsx'
 import CategoryPage from '../Pages/CategoryPage.jsx'
+import VideoUpload from '../Pages/VideoUpload.jsx'
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
@@ -53,6 +54,11 @@ createRoot(document.getElementById('root')).render(
             element={
               <CategoryPage/>
             }/>
+        <Route path='video/'>
+            <Route path='upload'  
+              element = {<VideoUpload/>}
+              />
+        </Route>
       </Route>
     </Routes>
   </BrowserRouter>,
