@@ -3,7 +3,7 @@ import { useEffect } from "react"
 import { useRef } from "react"
 
 
-const UploadWidget = ({setLink, allowedFiles, uploaded, setUploaded}) => {
+const UploadWidget = ({setLink, setId = () => {}, allowedFiles, uploaded, setUploaded, text = "Upload file"}) => {
     const cloudinaryRef = useRef()
     const widgetRef = useRef();
     const [isUploaded, setIsUploaded] = useState(uploaded)
@@ -13,7 +13,7 @@ const UploadWidget = ({setLink, allowedFiles, uploaded, setUploaded}) => {
     useEffect(() => {
         cloudinaryRef.current = window.cloudinary
         widgetRef.current = cloudinaryRef.current.createUploadWidget({
-            cloudName: 'dgyjvzohq',
+            cloudName: import.meta.env.VITE_CLOUDINARY_CLOUD_NAME,
             uploadPreset: 'vid-up',
             sources: ['local','url','camera','google_drive'],
             multiple: false,
@@ -26,6 +26,9 @@ const UploadWidget = ({setLink, allowedFiles, uploaded, setUploaded}) => {
                 setIsUploaded(true)
                 setUploaded(true)
                 setInfo(result.info)
+                if(allowedFiles === 'video')
+                    setId(result.info.public_id)
+
                 setLink(result.info.secure_url)
             }
             // Handle the result or error here
@@ -52,7 +55,7 @@ const UploadWidget = ({setLink, allowedFiles, uploaded, setUploaded}) => {
                 className="py-2 px-2 text-sm font-medium text-gray-700 transition-colors focus:relative"
                 
                 >
-                Upload File
+                {text}
                 </button>
             </span>
         </div>

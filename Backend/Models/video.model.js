@@ -17,7 +17,17 @@ const videoSchema = new mongoose.Schema({
         required: true,
     },
 
+    department: {
+        type: String,
+        required: true
+    },
+
     url: {
+        type: String,
+        required: true
+    },
+
+    publicId: {
         type: String,
         required: true
     },
@@ -37,6 +47,6 @@ const videoSchema = new mongoose.Schema({
         ref: "Category"
     },
 
-})
+}, {timestamps: true})
 
 export const Video = mongoose.model("Video", videoSchema)

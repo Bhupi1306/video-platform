@@ -4,16 +4,17 @@ import './index.css'
 import App from './App.jsx'
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import Form from '../Components/Form'
-import VideosPage from '../Components/VideosPage.jsx'
 import CategoryPage from '../Pages/CategoryPage.jsx'
 import VideoUpload from '../Pages/VideoUpload.jsx'
+import VideosPage from '../Pages/VideosPage.jsx'
+import VideoPlayPage from '../Pages/VideoPlayPage.jsx'
+import VideoEdit from '../Pages/VideoEdit.jsx'
+
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
     <Routes>
-
       <Route path='/'>
-
         <Route index element={
             <Form 
               fullName={false}
@@ -45,19 +46,25 @@ createRoot(document.getElementById('root')).render(
           } />
 
 
-        <Route path="home" 
-          element={
-            <VideosPage />
-          } />
+        <Route path="home/" >
+          <Route index element={<VideosPage />}/>
+          <Route path='play/' element={<VideoPlayPage/>} />
+        </Route>
 
           <Route path='categories'
             element={
               <CategoryPage/>
             }/>
-        <Route path='video/'>
+          <Route path='video/'>
             <Route path='upload'  
               element = {<VideoUpload/>}
               />
+
+            <Route path='edit'  
+              element = {<VideoEdit/>}
+              />
+
+
         </Route>
       </Route>
     </Routes>

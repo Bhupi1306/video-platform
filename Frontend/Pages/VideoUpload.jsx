@@ -15,6 +15,7 @@ const VideoUpload = () => {
     const [dataCategory, setDataCategory] = useState("")  // Temporary category used for communicating with dropdown takes Id
     const [dataVideoLink, setDataVideoLink] = useState("")
     const [dataThumbLink, setDataThumbLink] = useState("")
+    const [dataPublicId, setDataPubicId] = useState("")
     const [isVidUploaded, setIsVidUploaded ] = useState(false)
     const [isThumbUploaded, setIsThumbUploaded ] = useState(false)
     const [categories, setCategories] = useState([])
@@ -48,7 +49,8 @@ const VideoUpload = () => {
             ...prev,
             categoryId: dataCategory,
             url: dataVideoLink,
-            thumbnail: dataThumbLink
+            thumbnail: dataThumbLink,
+            publicId: dataPublicId
             }))
         }, [dataCategory, dataVideoLink, dataThumbLink]
     )
@@ -66,8 +68,8 @@ const VideoUpload = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        if(!data.title || !data.description || !data.categoryId || !data.url || data.categoryId === "Select")
+        console.log(data)
+        if(!data.title || !data.description || !data.categoryId || !data.department || !data.url || data.categoryId === "Select")
             return alert("All fields are required")
         
         const email = localStorage.getItem("email")
@@ -86,6 +88,8 @@ const VideoUpload = () => {
             setCount(count + 1)
             alert("Video Uploaded Successfully")
         }
+        else
+            alert("Upload Failed", result.message)
 
     }
 
@@ -93,7 +97,7 @@ const VideoUpload = () => {
         <>
             <Navbar/>
             <section>
-                <div className="max-w-2xl mx-auto p-8 py-12 bg-white rounded-xl shadow-lg mt-20">
+                <div className="max-w-2xl mx-auto mb-10 p-8 py-12 bg-white rounded-xl shadow-lg mt-20">
                     <h1 className="text-2xl font-bold text-center">Video Upload</h1>
                     <div className="mt-8">
                         <div className="mt-6">
@@ -108,6 +112,12 @@ const VideoUpload = () => {
                             <div>
                             <label htmlFor="description"  className="block text-sm font-medium text-gray-600"> Description </label>
                                 <textarea value={data?.description || ""} onChange={handleChange} id="description" name="description" type="text" required placeholder="Video description"
+                                className="mt-1 block w-full px-5 py-2 text-base text-gray-600 placeholder-gray-300 transition duration-500 ease-in-out transform border border-gray-200 rounded-lg bg-zinc-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300" />
+                            </div>
+
+                            <div>
+                            <label htmlFor="department"  className="block text-sm font-medium text-gray-600"> Department </label>
+                                <input value={data?.department || ""} onChange={handleChange} id="department" name="department" type="text" required placeholder="Department"
                                 className="mt-1 block w-full px-5 py-2 text-base text-gray-600 placeholder-gray-300 transition duration-500 ease-in-out transform border border-gray-200 rounded-lg bg-zinc-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300" />
                             </div>
 
@@ -128,6 +138,7 @@ const VideoUpload = () => {
                                     <label  className="block text-sm font-medium text-gray-600 mb-1"> Upload Video </label>
                                     <UploadWidget 
                                         setLink={setDataVideoLink}
+                                        setId = {setDataPubicId}
                                         allowedFiles='video'
                                         uploaded={isVidUploaded}
                                         setUploaded={setIsVidUploaded}
@@ -138,6 +149,7 @@ const VideoUpload = () => {
                                     <label  className="block text-sm font-medium text-gray-600 mb-1"> Upload Thumbnail </label>
                                     <UploadWidget
                                         setLink={setDataThumbLink}
+                                        setId = {setDataPubicId}
                                         allowedFiles= 'image'
                                         uploaded={isThumbUploaded}
                                         setUploaded={setIsThumbUploaded}
