@@ -16,14 +16,7 @@ createRoot(document.getElementById('root')).render(
   <BrowserRouter>
     <Routes>
       <Route path='/'>
-        <Route index element={
-            <Form 
-              fullName={false}
-              backendUrl={`${import.meta.env.VITE_API_BASE_URL}/api/v1/user/login`}
-              type="Login"
-              headerText="Login"
-            />
-          } />
+        <Route index element={<Dashboard/>} />
 
           <Route
             path='dashboard'
