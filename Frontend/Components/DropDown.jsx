@@ -1,25 +1,28 @@
 import { useEffect } from "react"
 import { useState } from "react"
 
-const DropDown = ({dropdownButtonValue = "Select", reRender,  dropdownValues=[], valueName="", showAdd=false, keyName="", setMainValue = () => {}} ) => {
+const DropDown = ({dropdownButtonValue = "Select", reRender,  dropdownValues=[], valueName="", showAdd=false, keyName="", setMainValue = () => {}, mainValue = ""} ) => {
 
     const [dropDownBtn, setDropDownBtn] = useState(dropdownButtonValue)
     const [dropdownVisible, setDropdownVisible] = useState(false)
 
     const values = dropdownValues
 
-
+console.log(mainValue)
 
     useEffect(()=>{
         setDropDownBtn(dropdownButtonValue)
-        setMainValue("")
         setDropdownVisible(false)
+        if(reRender){
+            setMainValue("")
+        }
     }, [reRender])
 
     const handleClick = (value) => {
         setDropDownBtn(value[valueName])
         setMainValue(value[keyName])
         setDropdownVisible(false)
+        
     }
 
     const handleAllClick = () => {

@@ -17,7 +17,7 @@ const VideoPlayPage = () => {
     const [categories, setCategories] = useState([])
     const [isThumbUploaded, setIsThumbUploaded ] = useState(false)
     const [dataThumbLink, setDataThumbLink] = useState(data.thumbnail)
-    const [dataCategory, setDataCategory] = useState("")
+    const [dataCategory, setDataCategory] = useState(data.category?.id || "")
     const [count, setCount] = useState(0)
     const [admin, setAdmin] = useState(false)
 
@@ -33,9 +33,8 @@ const VideoPlayPage = () => {
         thumbnail: data.thumbnail
     })
 
-    console.log(videoData)
 
-    
+    console.log(dataCategory)
 
 
 
@@ -131,6 +130,7 @@ const VideoPlayPage = () => {
                             keyName="id"
                             setMainValue={setDataCategory}
                             reRender = {count}
+                            mainValue={dataCategory}
                             />
                         </div>
 
