@@ -10,7 +10,13 @@ import videoRoutes from "../Routes/video.routes.js"
 const app = express()
 const port = process.env.PORT || 8000
 
-app.use(cors())
+app.use(
+    cors({
+    origin: "https://nirmaan-six.vercel.app", // ← replace with your actual frontend domain
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true, // if you're using cookies or sessions
+  })
+)
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded())
 
