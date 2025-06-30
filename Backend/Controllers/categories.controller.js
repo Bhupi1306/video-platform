@@ -1,4 +1,3 @@
-import { resolveEnvPrefix } from "vite"
 import { Category } from "../Models/category.model.js"
 
 const getCategories = async(req,res) => {
