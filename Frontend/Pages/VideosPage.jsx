@@ -69,7 +69,7 @@ export default function VideosPage() {
         <div className="relative">
           <Navbar/>
             
-          {videos.length && <div className="flex-row-reverse justify-center flex max-w-5xl mx-auto gap-x-2 sm:gap-x-10 mt-2 md:my-10">
+          {allVideos.length !== 0 && <div className="flex-row-reverse justify-center flex max-w-5xl mx-auto gap-x-2 sm:gap-x-10 mt-2 md:my-10">
             <div className="mr-5 mt-1">
               <DropDown
                 dropdownButtonValue="Category"
@@ -90,6 +90,12 @@ export default function VideosPage() {
             </div>   
               
           </div>}
+
+
+            {allVideos.length === 0 ? <div className="text-lg text-gray-400 max-w-xl mx-auto text-center mt-20 leading-7 p-4">
+              <p>Nirmann is the platform for uploading tutorial videos so we can learn the stuff that matters. We are gonna upload the videos soon. So just chill and leave the rest to us.</p>
+            </div>: ""}
+
           <div className="flex justify-around flex-wrap max-w-300 mx-auto pt-5 pb-10 px-5 gap-x-1 md:mt-10 ">
             {paginatedVideos.filter(item => {
               return searchValue.toLowerCase() === '' ? item : item.title?.toString().toLowerCase().includes(searchValue.toString().toLowerCase())

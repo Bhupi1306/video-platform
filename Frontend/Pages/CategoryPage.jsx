@@ -58,7 +58,9 @@ const CategoryPage = () => {
                 </div>
                 {categories.map((category) => {
                     return (
-                        <Category key={category.id} name={category.name} id={category.id} setRerender={setRerender} />
+                        <div className="w-full">
+                            <Category key={category.id} name={category.name} id={category.id} setRerender={setRerender} />
+                        </div>
                     )
                 })}
             </div>
