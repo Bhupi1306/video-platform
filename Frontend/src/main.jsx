@@ -9,6 +9,7 @@ import VideoUpload from '../Pages/VideoUpload.jsx'
 import VideosPage from '../Pages/VideosPage.jsx'
 import VideoPlayPage from '../Pages/VideoPlayPage.jsx'
 import VideoEdit from '../Pages/VideoEdit.jsx'
+import Dashboard from '../Pages/Dashboard.jsx'
 
 
 createRoot(document.getElementById('root')).render(
@@ -23,6 +24,11 @@ createRoot(document.getElementById('root')).render(
               headerText="Login"
             />
           } />
+
+          <Route
+            path='dashboard'
+            element={<Dashboard/>}
+          />
           
         <Route path="login" 
           element={

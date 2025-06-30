@@ -20,7 +20,7 @@ export default function VideosPage() {
 
 
   const [currentPage, setCurrentPage] = useState(0)
-  const itemsPerPage = 2;
+  const itemsPerPage = 9;
 
 
   const [searchValue, setSearchValue] = useState("")
@@ -69,7 +69,7 @@ export default function VideosPage() {
         <div className="relative">
           <Navbar/>
             
-          {videos.length && <div className="flex-row-reverse justify-center flex max-w-5xl mx-auto gap-x-2 sm:gap-x-10 mt-2">
+          {videos.length && <div className="flex-row-reverse justify-center flex max-w-5xl mx-auto gap-x-2 sm:gap-x-10 mt-2 md:my-10">
             <div className="mr-5 mt-1">
               <DropDown
                 dropdownButtonValue="Category"
@@ -90,8 +90,10 @@ export default function VideosPage() {
             </div>   
               
           </div>}
-          <div className="flex justify-around flex-wrap max-w-300 mx-auto pt-5 pb-10 ">
-            {paginatedVideos.map((video) =>(
+          <div className="flex justify-around flex-wrap max-w-300 mx-auto pt-5 pb-10 px-5 gap-x-1 md:mt-10 ">
+            {paginatedVideos.filter(item => {
+              return searchValue.toLowerCase() === '' ? item : item.title?.toString().toLowerCase().includes(searchValue.toString().toLowerCase())
+            }).map((video) =>(
               <span key={video.id} onClick={()=>{handleClick(video)}}>
                 <VideoCard
                   title={video.title}

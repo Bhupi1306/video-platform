@@ -84,7 +84,9 @@ export default function Navbar() {
         </button>
       </div>
 
-        <div className="order-3 sm:order-2 w-full sm:w-auto">
+        <div className="order-3 sm:order-2 w-full sm:w-auto 
+          bg-blue-50 p-2 text-sm sm:text-base sm:bg-white sm:p-0
+        ">
           <ul className="flex justify-between sm:w-110 cursor-default font-semibold">
             <NavLink className="sm:mr-7 mr-2 nav_links" to="/home">Home</NavLink>
             <NavLink className="sm:mr-7 mr-2 nav_links " to="/video/upload">Upload</NavLink>
@@ -98,6 +100,3 @@ export default function Navbar() {
     </>
   );
 }
-
-//TLTD
-// Make the buttons representable and responsive

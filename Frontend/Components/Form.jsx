@@ -12,6 +12,8 @@ const Form = ({fullName = true, backendUrl = "", type="", headerText=""}) => {
 
     useEffect(() => {
         const token = localStorage.getItem("token");
+        if(type === "Login")
+            setShowLogo(true)
         const apiLoad = async (token) => {
             try {
                 const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/v1/user/verify`, {
@@ -22,14 +24,12 @@ const Form = ({fullName = true, backendUrl = "", type="", headerText=""}) => {
                     body: JSON.stringify({ token })
                 });
                 const data = await response.json();
-
                 if(type === "Login")
                 {
                     if(data.success)
                     {
-                        navigate('/home')
+                        return navigate('/home')
                     }
-                    setShowLogo(true)
                 }
 
                 else if(type === "Registeration") 
@@ -97,13 +97,11 @@ const Form = ({fullName = true, backendUrl = "", type="", headerText=""}) => {
                   setData({});
                   if(type === "Registeration") 
                     {
-                        console.log("eoeo")
                         alert(`Registration successful!`);
                     }
                   if (type === "Login") {
                     localStorage.setItem("token", result.jwtToken);
                     localStorage.setItem("name", result.name);
-                    console.log(result.email)
                     localStorage.setItem("email", result.email)
                     navigate("/home");
                   }
@@ -122,8 +120,8 @@ const Form = ({fullName = true, backendUrl = "", type="", headerText=""}) => {
     return (
         <>
             <Navbar/>
-            <section>
-                <div className="max-w-md mx-auto p-8 py-12 bg-white rounded-xl shadow-lg mt-20">
+            <section className={`${showLogo ? "sm:mt-20 mt-10": "mt-5"}`}>
+                <div className="max-w-md mx-auto p-8 py-12 bg-white rounded-xl shadow-lg">
                     <div
                     className="">
                         {showLogo &&

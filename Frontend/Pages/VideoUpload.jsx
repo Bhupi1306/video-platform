@@ -97,7 +97,7 @@ const VideoUpload = () => {
         <>
             <Navbar/>
             <section>
-                <div className="max-w-2xl mx-auto mb-10 p-8 py-12 bg-white rounded-xl shadow-lg mt-20">
+                <div className="max-w-2xl mx-auto mb-10 p-8 py-12 bg-white rounded-xl shadow-lg  mt-5">
                     <h1 className="text-2xl font-bold text-center">Video Upload</h1>
                     <div className="mt-8">
                         <div className="mt-6">
@@ -121,10 +121,11 @@ const VideoUpload = () => {
                                 className="mt-1 block w-full px-5 py-2 text-base text-gray-600 placeholder-gray-300 transition duration-500 ease-in-out transform border border-gray-200 rounded-lg bg-zinc-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300" />
                             </div>
 
-                            <div className="flex justify-between">
+                            <div className="sm:flex justify-between">
                                 <div>
                                 <label  className="block text-sm font-medium text-gray-600 mb-1"> Category </label>
-                                    <DropDown
+                                    <div className="">
+                                        <DropDown
                                         dropdownButtonValue="Select"
                                         dropdownValues={categories}
                                         valueName="name"
@@ -132,6 +133,7 @@ const VideoUpload = () => {
                                         setMainValue={setDataCategory}
                                         reRender = {count}
                                     />
+                                    </div>
                                 </div>
 
                                 <div>

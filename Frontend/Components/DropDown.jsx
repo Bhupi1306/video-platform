@@ -30,7 +30,7 @@ const DropDown = ({dropdownButtonValue = "Select", reRender,  dropdownValues=[],
 
     return (
         <>
-        <div className="relative inline-flex">
+        <div className="relative inline-flex w-full">
         <span
             className="inline-flex justify-center divide-gray-300 overflow-hidden rounded-md px-2 border border-gray-300 bg-gray-50 shadow-sm min-w-25 w-full hover:bg-gray-50 hover:text-gray-900"
             onClick={() => {setDropdownVisible(!dropdownVisible)}}
