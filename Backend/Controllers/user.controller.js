@@ -19,8 +19,10 @@ const registerUser = async (req,res) => {
         if(findUser){
             return res.status(406).json({message: "Email already Exists", success: false})
         }
+
     
         const newUser = new User({
+            id: Date.now(),
             fullName,
             email,
             password
@@ -28,6 +30,7 @@ const registerUser = async (req,res) => {
         
         newUser.password = await bcrypt.hash(password,10)
         const createdUser = await newUser.save()
+
         
         if (createdUser) {            
             return res.status(201).json({message: "User created Successfully", success: true})

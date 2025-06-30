@@ -7,6 +7,18 @@ import { backendRequest } from "../Components/backendRequest";
 const CategoryPage = () => {
     const [categories,setCategories] = useState([])
     const [rerender, setRerender] = useState(0)
+
+    useEffect(() => {
+            const isAdmin = async () => {
+            const admin = await adminCheck()
+
+            if(!admin)
+                navigate('/login')
+            
+        }
+        isAdmin()
+    },[])
+
     useEffect(() => {
         const getCategories = async () => {
             const url = `${import.meta.env.VITE_API_BASE_URL}/api/v1/categories/get`;
@@ -24,7 +36,9 @@ const CategoryPage = () => {
         getCategories()
     },[rerender,setRerender])
 
-    const addNewCategory = async() => {
+
+    // Add new category with empty input to fill
+    const addNewCategory = async() => { 
         // await backendRequest(`${import.meta.env.VITE_API_BASE_URL}/api/v1/categories/add` ,"POST", {id:Date.now(), category:""})
         setCategories((prev) => (
             [{

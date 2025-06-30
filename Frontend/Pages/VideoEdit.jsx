@@ -33,12 +33,15 @@ const VideoPlayPage = () => {
         thumbnail: data.thumbnail
     })
 
+    console.log(videoData)
+
     
 
 
 
     useEffect(() => {
         const isAdmin = async () => {
+            
             const admin = await adminCheck()
 
             if(!admin)
@@ -83,8 +86,10 @@ const VideoPlayPage = () => {
 
     const handleClick = async() => {
         const result = await backendRequest(`${import.meta.env.VITE_API_BASE_URL}/api/v1/video/edit`, "POST", videoData)
+        console.log(videoData)
         alert(result.message)
-        navigate('/home')
+        if(result.success)
+            navigate('/home')
 
     }
 
@@ -117,32 +122,34 @@ const VideoPlayPage = () => {
                     px-2 py-1 sm:px-5 sm:py-2
                      text-base text-gray-600 placeholder-gray-300 transition duration-500 ease-in-out transform border border-gray-200 rounded-lg bg-zinc-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300" />
                             
-                    <div className="flex justify-around sm:flex-row flex-col">
-                        <DropDown
-                        dropdownButtonValue={videoData.categoryName}
-                        dropdownValues={categories}
-                        valueName="name"
-                        keyName="id"
-                        setMainValue={setDataCategory}
-                        reRender = {count}
-                    />
+                    <div className="flex justify-around sm:flex-row flex-col ">
+                        <div>
+                            <DropDown
+                            dropdownButtonValue={videoData.categoryName}
+                            dropdownValues={categories}
+                            valueName="name"
+                            keyName="id"
+                            setMainValue={setDataCategory}
+                            reRender = {count}
+                            />
+                        </div>
 
-                    <div className=" my-2 sm:my-0 ">
-                        <UploadWidget
-                        setLink={setDataThumbLink}
-                        allowedFiles= 'image'
-                        uploaded={isThumbUploaded}
-                        setUploaded={setIsThumbUploaded}
-                        text = "Thumbnail"
-                    />
-                    </div>
+                        <div className=" my-2 sm:my-0 ">
+                            <UploadWidget
+                            setLink={setDataThumbLink}
+                            allowedFiles= 'image'
+                            uploaded={isThumbUploaded}
+                            setUploaded={setIsThumbUploaded}
+                            text = "Thumbnail"
+                        />
+                        </div>
 
-                    <button onClick={handleClick}
-                     className="
-                     px-5 py-1 sm:py-2
-                      bg-blue-500 text-white rounded-md transition duration-150 hover:bg-blue-600">
-                        Save
-                    </button>
+                        <button onClick={handleClick}
+                        className="
+                        px-5 py-1 sm:py-2
+                        bg-blue-500 text-white rounded-md transition duration-150 hover:bg-blue-600">
+                            Save
+                        </button>
                     </div>
                 </div>
                 </div>
