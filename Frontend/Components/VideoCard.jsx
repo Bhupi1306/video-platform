@@ -2,7 +2,7 @@ const VideoCard = ({title, imgSrc, time, category}) => {
     return (
         <>
         <div
-         className="w-sm h-75 mb-5 rounded-xl border-2 border-gray-100 hover:bg-neutral-50  transition duration-400 hover:shadow-md">
+         className="max-w-sm h-75 mb-5 rounded-xl border-2 border-gray-100 hover:bg-neutral-50  transition duration-400 hover:shadow-md">
             <div className="overflow-hidden h-47 rounded-md mt-4 mx-4" >
                 <div className="w-full"> 
                 <img src={imgSrc} alt="img" className="" />

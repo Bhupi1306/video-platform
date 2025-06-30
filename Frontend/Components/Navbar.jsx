@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../src/assets/logo.jpg"
 
 
@@ -62,22 +62,19 @@ export default function Navbar() {
   return (
     <>
     {showNav && (
-    <nav className="bg-white  px-6 flex justify-between items-center">
+    <nav className="bg-white  px-6 flex justify-between items-center flex-wrap">
       <div className="text-2xl font-semibold text-blue-600 mt-2" onClick={() => {navigate('/home')}}>
         <img src={logo} alt="Logo" className="md:h-15 sm:h-12 h-12" />
         </div>
 
-        <ul>
-          <li>Upload</li>
-          <li>Categories</li>
-        </ul>
-      <div className="space-x-5">
-        {isAdmin &&(<button
+
+        <div className="space-x-5 order-2 sm:order-3">
+        {/* {isAdmin &&(<button
           onClick={handleNewUser}
           className="md:px-4 md:py-2 px-2 py-1 rounded-xl bg-blue-500 text-white hover:bg-blue-600 transition"
         >
           New User
-        </button>)}
+        </button>)} */}
         
         <button
           onClick={handleLogout}
@@ -86,6 +83,16 @@ export default function Navbar() {
           Logout
         </button>
       </div>
+
+        <div className="order-3 sm:order-2 w-full sm:w-auto">
+          <ul className="flex justify-between sm:w-110 cursor-default font-semibold">
+            <NavLink className="sm:mr-7 mr-2 nav_links" to="/home">Home</NavLink>
+            <NavLink className="sm:mr-7 mr-2 nav_links " to="/video/upload">Upload</NavLink>
+            <NavLink className="sm:mr-7 mr-2 nav_links" to="/categories">Categories</NavLink>
+            <NavLink className="nav_links" to="/register">New User</NavLink>
+        </ul>
+        </div>
+      
     </nav>
     )}
     </>

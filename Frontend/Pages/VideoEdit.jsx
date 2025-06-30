@@ -27,8 +27,8 @@ const VideoPlayPage = () => {
         id: data.id,
         title: data.title,
         department: data.department,
-        categoryId: data.category.id,
-        categoryName: data.category.name,
+        category: data.category?.id || "",
+        categoryName: data.category?.name || "No category",
         description: data.description,
         thumbnail: data.thumbnail
     })
@@ -50,8 +50,6 @@ const VideoPlayPage = () => {
             const result = await backendRequest(`${import.meta.env.VITE_API_BASE_URL}/api/v1/categories/get`, "GET")
             setCategories(result.categories)
         }
-        console.log(videoData)
-        console.log(data.category.id)
 
         isAdmin()
         getCat()
@@ -61,7 +59,7 @@ const VideoPlayPage = () => {
     useEffect(() => {
         setVideoData((prev) => ({
             ...prev,
-            categoryId: dataCategory,
+            category: dataCategory,
             }))
         }, [dataCategory]
     )
@@ -86,6 +84,8 @@ const VideoPlayPage = () => {
     const handleClick = async() => {
         const result = await backendRequest(`${import.meta.env.VITE_API_BASE_URL}/api/v1/video/edit`, "POST", videoData)
         alert(result.message)
+        navigate('/home')
+
     }
 
 
@@ -103,15 +103,21 @@ const VideoPlayPage = () => {
                 </div>
                 <div className="px-7">
                     <input onChange={handleChange} value={videoData?.title || ""} id="title" name="title" type="text" required placeholder="Video title"
-                    className="mb-5 font-semibold mt-1 block w-full px-5 py-2 text-base text-gray-600 placeholder-gray-300 transition duration-500 ease-in-out transform border border-gray-200 rounded-lg bg-zinc-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300" />
+                    className="mb-5 font-semibold mt-1 block w-full 
+                    px-2 py-1 sm:px-5 sm:py-2
+                     text-base text-gray-600 placeholder-gray-300 transition duration-500 ease-in-out transform border border-gray-200 rounded-lg bg-zinc-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300" />
                     
                     <textarea onChange={handleChange} value={videoData?.description || ""} id="description" name="description" type="text" required placeholder="Video description"
-                    className="mb-5 mt-1 block w-full px-5 py-2 text-base text-gray-600 placeholder-gray-300 transition duration-500 ease-in-out transform border border-gray-200 rounded-lg bg-zinc-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300" />
+                    className="mb-5 mt-1 block w-full 
+                    px-2 py-1 sm:px-5 sm:py-2
+                    text-base text-gray-600 placeholder-gray-300 transition duration-500 ease-in-out transform border border-gray-200 rounded-lg bg-zinc-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300" />
                     
                     <input onChange={handleChange} value={videoData?.department || ""} id="department" name="department" type="text" required placeholder="Department"
-                    className="mb-5 mt-1 block w-full px-5 py-2 text-base text-gray-600 placeholder-gray-300 transition duration-500 ease-in-out transform border border-gray-200 rounded-lg bg-zinc-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300" />
+                    className="mb-5 mt-1 block w-full 
+                    px-2 py-1 sm:px-5 sm:py-2
+                     text-base text-gray-600 placeholder-gray-300 transition duration-500 ease-in-out transform border border-gray-200 rounded-lg bg-zinc-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300" />
                             
-                    <div className="flex justify-around">
+                    <div className="flex justify-around sm:flex-row flex-col">
                         <DropDown
                         dropdownButtonValue={videoData.categoryName}
                         dropdownValues={categories}
@@ -121,16 +127,20 @@ const VideoPlayPage = () => {
                         reRender = {count}
                     />
 
-                    <UploadWidget
+                    <div className=" my-2 sm:my-0 ">
+                        <UploadWidget
                         setLink={setDataThumbLink}
                         allowedFiles= 'image'
                         uploaded={isThumbUploaded}
                         setUploaded={setIsThumbUploaded}
-                        text = "thumbnail"
+                        text = "Thumbnail"
                     />
+                    </div>
 
                     <button onClick={handleClick}
-                     className="px-5 py-2 bg-blue-500 text-white rounded-xl transition duration-150 hover:bg-blue-600">
+                     className="
+                     px-5 py-1 sm:py-2
+                      bg-blue-500 text-white rounded-md transition duration-150 hover:bg-blue-600">
                         Save
                     </button>
                     </div>

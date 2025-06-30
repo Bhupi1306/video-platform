@@ -1,3 +1,21 @@
 @import "tailwindcss";
 @plugin "flowbite-react/plugin/tailwindcss";
 @source "../.flowbite-react/class-list.json";
+
+
+@layer components{
+
+    .nav_links {
+        transition: all;
+        transition-duration: 300ms;
+        cursor: default;
+    }
+
+    .nav_links:hover {
+        color: #3F83F8;
+    }
+
+    .nav_links.active {
+        color: #3F83F8;
+    }
+}

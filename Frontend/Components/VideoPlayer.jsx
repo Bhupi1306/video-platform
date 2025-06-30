@@ -27,7 +27,7 @@ const VideoPlayer = ({publicId}) => {
     <div className="auto">
       <video
       ref={playerRef}
-      className="cld-video-player cld-fluid"
+      className="cld-video-player cld-fluid aspect-video"
     />
     </div>
   );

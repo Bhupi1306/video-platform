@@ -39,7 +39,7 @@ const CategoryPage = () => {
         <>
             <Navbar/>
             <div>
-                <div className=" w-xl mx-auto flex flex-row-reverse">
+                <div className=" max-w-xl mx-auto flex flex-row-reverse">
                     <button className="px-4 py-2 mt-10 mb-3 bg-gray-50 inline-block" onClick={addNewCategory}>Add Category</button>
                 </div>
                 {categories.map((category) => {

@@ -3,6 +3,27 @@ import { User } from "../Models/User.model.js"
 import { Video } from "../Models/video.model.js"
 import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime.js"
+import {v2 as cloudinary} from "cloudinary"
+
+cloudinary.config(
+    {
+        cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+        api_key: process.env.CLOUDINARY_API_KEY,
+        api_secret: process.env.CLOUDINARY_API_SECRET
+    }
+)
+
+function getPublicIdFromUrl(url) {
+  const parts = url.split('/');
+  const fileWithExt = parts.pop(); // e.g., hehml8ljpko4kxnmifru.mp4
+  const versionOrFolder = parts.pop(); // e.g., v1719508200
+
+  const filename = fileWithExt.split('.')[0]; // remove extension
+  const folder = parts.pop(); // e.g., Nirmaan
+
+  return `${folder}/${filename}`;
+}
+
 
 const videoUpload = async (req, res) => {
     try {
@@ -49,6 +70,9 @@ const getVideos = async (req,res) => {
         dayjs.extend(relativeTime)
         const tempVideos = await Video.find({}).populate('category')
 
+        if(!tempVideos) 
+            return res.status(500).json({message: "No videos found" , success: false})
+
         const videos = tempVideos.map((video)=>{
             const obj = video.toObject()
             obj.relativeTime = dayjs(video.createdAt).fromNow()
@@ -68,7 +92,11 @@ const editVideo = async(req,res) => {
     try {
         const {id, title, description, department, category, thumbnail} = req.body
 
-        const fullCategory = await Category.findOne({category})
+        if( !id || !title || !description || !department || !category)
+            return res.status(200).json({message: "All fields are required", success: false})
+        
+
+        const fullCategory = await Category.findOne({id:category})
 
         const editedVideo = await Video.findOneAndUpdate({id},{$set: {
             title,
@@ -86,10 +114,45 @@ const editVideo = async(req,res) => {
     }
 }
 
+const deleteVideo = async(req,res) => {
+    try {
+        const {id} = req.body
+        if(!id)
+            return res.status(400).json({message: "Id is required", success:false})
+
+        const videoId = await Video.findOne({id})
+
+
+        const result = await cloudinary.uploader.destroy(videoId.publicId, {
+            resource_type: 'video'
+        })
+
+        const thumbnail = videoId.thumbnail
+        if(thumbnail){
+            const url = getPublicIdFromUrl(thumbnail)
+            await cloudinary.uploader.destroy(url, {
+            resource_type: 'image'
+        })
+        }
+        
+        if(result.result !== 'ok')
+            return res.status(500).json({message: "Something went wrong", success: false, result})
+        else 
+        {
+            await Video.findOneAndDelete({id})
+            return res.status(200).json({message: "Video deleted successfully", success: true})
+        }
+    } catch (error) {
+        return res.status(500).json({message: "Something went Wrong", success: false, error})
+    }
+}
+
+
 
 export{
     videoUpload,
     getVideos,
-    editVideo
+    editVideo,
+    deleteVideo
 }
 

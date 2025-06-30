@@ -51,11 +51,11 @@ const Categories = ({name, id, setRerender}) => {
 
     return (
         <>
-            <div className="w-xl mx-auto mt-2"> 
+            <div className="max-w-xl mx-auto mt-2"> 
                 <div className="w-full "> 
                     <div className="mt-1 relative">
                         <input ref={focusOn} value={value || ""} onKeyDown={(e) => {handleEnter(e)}} onChange={(e)=>(setValue(e.target.value))} id={categoryId} name={categoryId} type="text" required={true} readOnly={!isEditable}
-                        className={`required block w-full px-5 py-3 text-base text-gray-600 placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-2xl bg-gray-50 focus:outline-none ${isEditable? " focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300" : " " }`}/>
+                        className={`required block max-w-full px-5 py-3 text-base text-gray-600 placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-2xl bg-gray-50 focus:outline-none ${isEditable? " focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300" : " " }`}/>
                         <div className=" absolute top-0 right-0">
                            <div className={`${isEditable?"hidden" : ""}  flex items-center`}>
                              <div className="py-4 px-0 text-gray-400 hover:text-gray-600"  onClick={handleEditClick}>

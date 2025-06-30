@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import logo from "../src/assets/react.svg";
+import logo from "../src/assets/logo.jpg";
 import Navbar from "./Navbar";
 
 
@@ -8,6 +8,7 @@ const Form = ({fullName = true, backendUrl = "", type="", headerText=""}) => {
 
     const [data, setData] = useState({})
     const navigate = useNavigate();
+    const [showLogo, setShowLogo] = useState(false)
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -28,6 +29,7 @@ const Form = ({fullName = true, backendUrl = "", type="", headerText=""}) => {
                     {
                         navigate('/home')
                     }
+                    setShowLogo(true)
                 }
 
                 else if(type === "Registeration") 
@@ -124,16 +126,18 @@ const Form = ({fullName = true, backendUrl = "", type="", headerText=""}) => {
                 <div className="max-w-md mx-auto p-8 py-12 bg-white rounded-xl shadow-lg mt-20">
                     <div
                     className="">
+                        {showLogo &&
                         <div className="flex items-center justify-center mb-6">
-                            <div className={` rounded-full overflow-hidden border-2 border-gray-200 shadow-md h-20 w-20`}>
+                            <div className={` rounded-full overflow-hidden border-2 border-gray-200 shadow-md h-20 w-20 flex items-center`}>
                             <img
                                 // src="https://via.placeholder.com/150"
                                 src={logo}
                                 alt="Logo of company"
-                                className="object-cover w-full h-full"
+                                className="object-cover w-full"
                             />
                             </div>
                         </div>
+                        }
                     <h1 className="text-2xl font-bold text-center">{headerText}</h1>
                     <div className="mt-8">
                         <div className="mt-6">
